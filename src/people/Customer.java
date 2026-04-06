@@ -29,12 +29,12 @@ public class Customer extends Person
         orderHistory[orderCount++] = order;
     }
     
-    public void listOrders()
-    {
-        for(int i = 0; i < orderCount; i++) { 
-            System.out.println("Bill number " + (i+1) + ":\t" + orderHistory[i].orderId + 
-                               "\nItems:\t" + orderHistory[i].itemCount + 
-                               "\nTotal:\t" + orderHistory[i].finalTotal);
+    public void listOrders() {
+        for(int i = 0; i < orderCount; i++) {
+            System.out.println("[ Order #" + orderHistory[i].orderId + " ]");
+            System.out.println("Total Items: " + orderHistory[i].itemCount);
+            System.out.println("Amount Paid: Rs " + orderHistory[i].finalTotal);
+            System.out.println();
         }
     }
 }
