@@ -1,34 +1,40 @@
 package people;
 import billing.*;
 
-class Customer extends person
+public class Customer extends Person
 {
-    String phoneNumber;
-    int orderCount;
-    RestaurantOrder[] orderHistory;
-    Customer(int id, String name, String phoneNumber)
+    public String phoneNumber;
+    public int orderCount;
+    public RestaurantOrder[] orderHistory;
+    
+    public Customer(int id, String name, String phoneNumber)
     {
         super(id,name);
-        this.phoneNumber=phoneNumber;
-        this.orderCount=0;
+        this.phoneNumber = phoneNumber;
+        this.orderCount = 0;
         this.orderHistory = new RestaurantOrder[50];
     }
-    void display()
+
+    @Override
+    public void display()
     {
         System.out.println("Name:\t"+name);
         System.out.println("ID:\t"+id);
         System.out.println("Phone number:\t"+phoneNumber);
         System.out.println("Order number:\t"+orderCount);
     }
-    void addOrderToHistory(RestaurantOrder x)
+    
+    public void addOrderToHistory(RestaurantOrder order)
     {
-        orderHistory[orderCount++]=x;
+        orderHistory[orderCount++] = order;
     }
-    void listorder()
+    
+    public void listOrders()
     {
-        for(int i=1; i<=orderCount; i++)
-        {
-            System.out.println("Bill number "+i+":\t"+orderHistory[i].orderID+"\nAnd the number of items were:\t"+orderHistory[i].itemCount+"\nThe total amount for this order is:\t"+orderHistory[i].finalTotal);
+        for(int i = 0; i < orderCount; i++) { 
+            System.out.println("Bill number " + (i+1) + ":\t" + orderHistory[i].orderId + 
+                               "\nItems:\t" + orderHistory[i].itemCount + 
+                               "\nTotal:\t" + orderHistory[i].finalTotal);
         }
     }
 }
