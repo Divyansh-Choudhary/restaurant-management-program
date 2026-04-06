@@ -1,12 +1,13 @@
 package people;
-abstract class Person
-{
-    int id;
-    String name;
-    Person(int id, String name)
-    {
-        this.id=id;
-        this.name=name;
+
+public abstract class Person {
+    public int id;
+    public String name;
+    
+    public Person(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
-    abstract void display();
+    
+    public abstract void display();
 }
