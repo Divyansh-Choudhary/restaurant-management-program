@@ -25,7 +25,7 @@ public class main {
         int choice;
 
         do {
-            System.out.println("\n--- Projectoid Restaurant ---");
+            System.out.println("\n--- Restaurant Software ---");
             System.out.println("1. Manage Menu");
             System.out.println("2. Customers & History");
             System.out.println("3. Take Order");
@@ -117,7 +117,7 @@ public class main {
                     for(int i = 0; i < cCount; i++) {
                         if(customers[i].phoneNumber.equals(phone)) {
                             cust = customers[i];
-                            System.out.println("Welcome back " + cust.name);
+                            System.out.println("Welcome back " + cust.name + "!");
                             break;
                         }
                     }
