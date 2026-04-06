@@ -14,7 +14,7 @@ public class RestaurantOrder implements Billable{
     public RestaurantOrder(int orderId , int customerId ){
         this.orderId = orderId;
         this.customerId = customerId;
-        this.orderedItems = new int[50][3];
+        this.orderedItems = new int[50][2];
         this.itemCount = 0;
         this.finalTotal = 0;
     }
@@ -33,7 +33,8 @@ public class RestaurantOrder implements Billable{
         orderedItems[itemCount][1] = qnt;
         itemCount++;
     }
-    
+
+    @Override
     public double calculateTotal(Menu menu){
         this.finalTotal = 0;
 
@@ -42,49 +43,39 @@ public class RestaurantOrder implements Billable{
         for(int i = 0; i < itemCount; i++){
             int itemId = orderedItems[i][0];
             int itemQnt = orderedItems[i][1];  
-            for (int j = 0; j < menu.items.length; j++){
-                MenuItem item = menu.items[j];
-                if(item.id == itemId){
-                    this.finalTotal += item.price*itemQnt;
-                    break;
-                }
-            }
+            double price = menu.getPriceById(itemId);
+            if(price != -1)
+                this.finalTotal += price * itemQnt;        
         }
     
         return finalTotal;
     }
     
+    @Override
     public void printReceipt(Menu menu, Customer customer){
-        int menuLength = menu.itemCount;
-        
-        String receipt = "Bill no : " + orderId + "\n";
-
-        receipt += "\nCustomer name: " + customer.name;
-        receipt += "\nMobile number: " + customer.mobileNumber;
-                
+        String receipt = "\n=== Bill no: " + orderId + " ===\n";
+        receipt += "Customer name: " + customer.name;
+        receipt += "\nMobile number: " + customer.phoneNumber;
         receipt += "\n=======================\n";
         receipt += "Name\tPrice\tQty\tCost\n";
 
         if(itemCount == 0){
-            receipt += "Nothing\tto\teat.\nNothing\tto\tdrink.\n";
-            receipt += "\nWe Hope to see you spending some penny next time.";
-        }else{
+            receipt += "No items ordered.\n";
+        } else {
             for(int i = 0; i < itemCount; i++){
                 int itemId = orderedItems[i][0];
-                int itemQnt = orderedItems[i][1];  
-                for (int j = 0; j < menuLength; j++){
+                int itemQnt = orderedItems[i][1];  
+                
+                for (int j = 0; j < menu.count; j++){
                     MenuItem item = menu.items[j];
                     if(item.id == itemId){
-                        receipt += i + ". " + item.name + "\t" + item.price + "\t" +
+                        receipt += item.name + "\t" + item.price + "\t" +
                                    itemQnt + "\t" + (item.price * itemQnt) + "\n";
                     }
                 }
             }
-            receipt += "\tGrand Total:\t" + this.calculateTotal(menu);
-
-            receipt += "";
+            receipt += "\tGrand Total:\t" + this.calculateTotal(menu) + "\n";
         }
-
         System.out.println(receipt);
     }
 }
