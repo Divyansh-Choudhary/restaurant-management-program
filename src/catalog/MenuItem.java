@@ -1,7 +1,6 @@
-package catalog
-import java.util.Scanner;
+package catalog;
 
-class MenuItem {
+public class MenuItem {
     public int id;
     public String name;
     public double price;
@@ -16,4 +15,3 @@ class MenuItem {
         System.out.println("ID: " + id + ", Name: " + name + ", Price: " + price);
     }
 }
-
