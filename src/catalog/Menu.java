@@ -1,10 +1,11 @@
-class Menu extends MenuItem {
+package catalog;
+
+public class Menu {
     public MenuItem[] items;
     public int count;
 
-    public Menu(int id, String name, double price) {
-        super(id, name, price);
-        items = new MenuItem[100];
+    public Menu() {
+        items = new MenuItem[50];
         count = 0;
     }
 
