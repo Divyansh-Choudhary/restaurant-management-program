@@ -42,7 +42,7 @@ public class RestaurantOrder implements Billable{
         
         for(int i = 0; i < itemCount; i++){
             int itemId = orderedItems[i][0];
-            int itemQnt = orderedItems[i][1];  
+            int itemQnt = orderedItems[i][1];
             double price = menu.getPriceById(itemId);
             if(price != -1)
                 this.finalTotal += price * itemQnt;        
