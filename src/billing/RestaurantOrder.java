@@ -20,7 +20,7 @@ public class RestaurantOrder implements Billable{
     }
     
     public void addItemToOrder(int id , int qnt){
-        for(int i = 0; i < orderedItems.length; i++){
+        for(int i = 0; i < itemCount; i++){
             if(orderedItems[i][0] == id ){
                 orderedItems[i][1] += qnt;
                 return;
@@ -62,8 +62,8 @@ public class RestaurantOrder implements Billable{
         receipt += "\nCustomer name: " + customer.name;
         receipt += "\nMobile number: " + customer.mobileNumber;
                 
-        receipt += "=======================";
-        receipt += ">>   Name\tPrice    Qnt    Cost\t";
+        receipt += "\n=======================\n";
+        receipt += "Name\tPrice\tQty\tCost\n";
 
         if(itemCount == 0){
             receipt += "Nothing\tto\teat.\nNothing\tto\tdrink.\n";
@@ -75,7 +75,8 @@ public class RestaurantOrder implements Billable{
                 for (int j = 0; j < menuLength; j++){
                     MenuItem item = menu.items[j];
                     if(item.id == itemId){
-                        receipt+= i + ". " + item.name + "\t" + item.price + "    " + itemQnt + "    " + (double)(item.price * itemQnt);
+                        receipt += i + ". " + item.name + "\t" + item.price + "\t" +
+                                   itemQnt + "\t" + (item.price * itemQnt) + "\n";
                     }
                 }
             }
@@ -83,6 +84,7 @@ public class RestaurantOrder implements Billable{
 
             receipt += "";
         }
-        
+
+        System.out.println(receipt);
     }
 }
