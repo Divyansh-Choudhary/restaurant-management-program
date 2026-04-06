@@ -1,4 +1,5 @@
 // main execution file for the restaurant project
+package app;
 
 import catalog.*;
 import people.*;
@@ -91,7 +92,7 @@ public class main {
                                     if(customers[i].orderCount == 0) {
                                         System.out.println("No orders yet.");
                                     } else {
-                                        customers[i].listorder(); 
+                                        customers[i].listOrders(); 
                                     }
                                     found = true;
                                     break;
