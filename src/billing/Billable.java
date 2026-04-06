@@ -3,7 +3,7 @@
  * Includes methods for calculating total cost and printing receipts.
  */
 
-package restro;
+package billing;
 
 interface Billable {
 
