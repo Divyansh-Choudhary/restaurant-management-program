@@ -50,15 +50,21 @@ public class RestaurantOrder implements Billable{
     
         return finalTotal;
     }
-    
+
     @Override
     public void printReceipt(Menu menu, Customer customer){
-        String receipt = "\n=== Bill no: " + orderId + " ===\n";
-        receipt += "Customer name: " + customer.name;
-        receipt += "\nMobile number: " + customer.phoneNumber;
-        receipt += "\n=======================\n";
-        receipt += "Name\tPrice\tQty\tCost\n";
-
+        String receipt = "\n===================================\n";
+        receipt += "          RESTAURANT BILL          \n";
+        receipt += "===================================\n";
+        receipt += "Order No : " + orderId + "\n";
+        receipt += "Customer : " + customer.name + "\n";
+        receipt += "Mobile   : " + customer.phoneNumber + "\n";
+        receipt += "-----------------------------------\n";
+        
+        // We put two tabs after 'Item' to give the names enough room
+        receipt += "Item\t\tQty\tPrice\tTotal\n"; 
+        receipt += "-----------------------------------\n";
+    
         if(itemCount == 0){
             receipt += "No items ordered.\n";
         } else {
@@ -69,12 +75,19 @@ public class RestaurantOrder implements Billable{
                 for (int j = 0; j < menu.count; j++){
                     MenuItem item = menu.items[j];
                     if(item.id == itemId){
-                        receipt += item.name + "\t" + item.price + "\t" +
-                                   itemQnt + "\t" + (item.price * itemQnt) + "\n";
+                        
+                        String tabFix = "\t";
+                        if(item.name.length() < 8) {
+                            tabFix = "\t\t";
+                        }
+                        
+                        receipt += item.name + tabFix + itemQnt + "\t" + item.price + "\t" + (item.price * itemQnt) + "\n";
                     }
                 }
             }
-            receipt += "\tGrand Total:\t" + this.calculateTotal(menu) + "\n";
+            receipt += "-----------------------------------\n";
+            receipt += "\t\tGRAND TOTAL: Rs " + this.calculateTotal(menu) + "\n";
+            receipt += "===================================\n";
         }
         System.out.println(receipt);
     }
